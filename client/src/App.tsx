@@ -16,8 +16,10 @@ function App() {
     setShortUrl("");
     setCopied(false);
 
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    console.log("this is the :", backendUrl);
     try {
-      const response = await axios.post("http://localhost:5000/api/shorten", {
+      const response = await axios.post(`${backendUrl}/api/shorten`, {
         original_url: longUrl,
       });
       setShortUrl(response.data.short_url);
