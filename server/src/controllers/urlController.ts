@@ -23,16 +23,25 @@ export const shortenUrl = async (req: Request, res: Response) => {
     res.status(500).json({ message: "server error" });
   }
 };
+
 export const redirectUrl = async (req: Request, res: Response) => {
-  const { shortcode } = req.params;
-  const url = await Url.findOne({ short_code: shortcode });
-  if (!url) return res.status(404).send("URL not found");
+  try {
+    const { short_code } = req.params;
+    const url = await Url.findOne({ short_code });
 
-  url.vists += 1;
-  await url.save();
+    if (!url) {
+      return res.status(404).json({ message: "Short URL not found" });
+    }
 
-  res.redirect(url.original_url);
+    url.visits += 1;
+    await url.save();
+
+    res.redirect(url.original_url);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
 };
+
 export const listUrls = async (req: Request, res: Response) => {
   try {
     const urls: IUrl[] = await Url.find().sort({ createdAt: -1 });
@@ -41,6 +50,7 @@ export const listUrls = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Error fetching URLs" });
   }
 };
+
 export const deleteUrl = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;

@@ -5,14 +5,13 @@ import {
   redirectUrl,
   shortenUrl,
 } from "../controllers/urlController";
-import { adminAuth } from "../middleware/authMIddleware";
 
 const router = Router();
 
 router.post("/api/shorten", shortenUrl);
-router.get("/api/admin", adminAuth, listUrls);
-router.delete("/api/admin/:id", adminAuth, deleteUrl);
+router.get("/api/list", listUrls);
+router.delete("/api/:id", deleteUrl);
 
-router.get("/:shortcode", redirectUrl);
+router.get("/:short_code", redirectUrl);
 
 export default router;
