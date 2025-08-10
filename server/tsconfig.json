@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    // File paths
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    // Module system
+    "module": "commonjs",
+    "target": "esnext",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+
+    // Output options
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    // Strict type checks
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    // Keep it clean
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": false
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
