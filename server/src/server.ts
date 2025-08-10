@@ -7,11 +7,10 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({}));
 app.use(express.json());
 
-const mongoUri =
-  process.env.MONGO_URI || "mongodb://localhost:27017/urlshortener";
+const mongoUri = process.env.MONGO_URI || "";
 
 mongoose
   .connect(mongoUri)
